@@ -10,7 +10,7 @@ function Header() {
     }
     return (
         <>
-            <div className='bg-black' >
+            <div className='bg-black  w-full '  >
                 <div className='flex justify-between items-center'>
                     <div>
                         <img src="/Mitram.png" alt="" className='w-20 h-20' />
@@ -29,7 +29,7 @@ function Header() {
 
             </div>
             {/* mobile view */}
-            <div  className={`fixed top-20 right-0 lg:hidden bg-black font-semibold w-40 h-full shadow-lg transition-transform duration-500  ease-in-out transform ${show ? 'translate-x-0':'translate-x-full'
+            <div  className={`fixed top-20 right-0 lg:hidden bg-black font-semibold w-40 h-full shadow-lg transition-transform duration-500 z-10 ease-in-out transform ${show ? 'translate-x-0':'translate-x-full'
           }`}>
            <div className='p-5'> 
             <p className='text-lg text-white mb-5'>Home</p>
