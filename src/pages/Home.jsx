@@ -4,6 +4,8 @@ import Footer from '../components/Footer'
 import Homeknowmore from '../components/Homeknowmore'
 import { Link } from 'react-router-dom'
 
+
+
 function Home() {
 
     return (
@@ -36,10 +38,7 @@ function Home() {
 
             </div>
             <Homeknowmore/>
-
-
-
-
+         
             <Footer />
         </>
     )
