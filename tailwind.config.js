@@ -6,18 +6,22 @@ export default {
   ],
   theme: {
     extend: {
-      backgroundImage:{
-        'homecover':'linear-gradient(to bottom,rgb(0 0 0 / 83%), rgb(0 0 0 / 83%)),url("/cover.jpg")',
-        'danger1':'linear-gradient(to bottom,rgb(0 0 0 / 50%), rgb(0 0 0 / 50%)),url("/danger1.jpg")',
-        'shelter1':'linear-gradient(to bottom,rgb(0 0 0 / 50%), rgb(0 0 0 / 50%)),url("/shelter1.jpg")',
-        'help1':'linear-gradient(to bottom,rgb(0 0 0 / 50%), rgb(0 0 0 / 50%)),url("/help1.jpg")',
+      backgroundImage: {
+        'homecover': 'linear-gradient(to bottom,rgb(0 0 0 / 83%), rgb(0 0 0 / 83%)),url("/cover.jpg")',
+        'danger1': 'linear-gradient(to bottom,rgb(0 0 0 / 50%), rgb(0 0 0 / 50%)),url("/danger1.jpg")',
+        'shelter1': 'linear-gradient(to bottom,rgb(0 0 0 / 50%), rgb(0 0 0 / 50%)),url("/shelter1.jpg")',
+        'help1': 'linear-gradient(to bottom,rgb(0 0 0 / 50%), rgb(0 0 0 / 50%)),url("/help1.jpg")',
+        'disastercover': 'linear-gradient(to bottom,rgb(0 0 0 / 50%), rgb(0 0 0 / 50%)),url("/flood.jpg")',
+        'sheltercover': 'linear-gradient(to bottom,rgb(0 0 0 / 50%), rgb(0 0 0 / 50%)),url("/camp.jpg")',
+  
+      },
+      colors: {
+        sky: '#25B4BF', // Add your custom color here
+         instagram: 'linear-gradient(to bottom, #F58529, #DD2A7B, #8134AF, #515BD4)'
 
       },
-    colors: {
-      sky: '#25B4BF', // Add your custom color here
     },
   },
-},
   plugins: [],
 }
 

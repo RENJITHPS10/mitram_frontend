@@ -1,6 +1,7 @@
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 
 function Header() {
@@ -10,16 +11,16 @@ function Header() {
     }
     return (
         <>
-            <div className='bg-black  w-full '  >
+            <div className='bg-black  w-full fixed z-10 '  >
                 <div className='flex justify-between items-center'>
                     <div>
                         <img src="/Mitram.png" alt="" className='w-20 h-20' />
                     </div>
                     <div className='justify-center items-center text-sky font-bold text-xl hidden md:flex '  >
-                        <h1 className='md:me-20 me-5'>Home</h1>
-                        <h1 className='md:me-20 me-5'>Disasters</h1>
-                        <h1 className='md:me-20 me-5'>Shelters</h1>
-                        <button className='bg-sky text-white rounded-full font-semibold hidden md:flex px-8 py-2 me-20'>Login</button>
+                       <Link to={'/'}> <h1 className='md:me-20 me-5'>Home</h1></Link>
+                     <Link to={'/disasters'}>   <h1 className='md:me-20 me-5'>Disasters</h1></Link>
+                      <Link to={'/shelters'}>  <h1 className='md:me-20 me-5'>Shelters</h1></Link>
+                        <button className='bg-sky text-white rounded-full font-semibold hidden md:flex px-8 pb-2 pt-1 me-5'>Login</button>
                     </div>
                     <div className='md:hidden ' onClick={toggleMenu}>
                         <FontAwesomeIcon icon={faBars} className='text-sky fa-xl me-5' />
