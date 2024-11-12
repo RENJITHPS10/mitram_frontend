@@ -7,9 +7,11 @@ import AOS from 'aos';
 import 'aos/dist/aos.css'; // AOS styles
 import Disasters from './pages/Disasters';
 import Shelters from './pages/Shelters';
-import UserAuth from './pages/UserAuth';
+import Userlogin from './pages/Userlogin';
+import UserSignup from './pages/UserSignup';
 
-AOS.init(); // Initialize AOS once on app load
+
+AOS.init(); 
 
 function App() {
   
@@ -20,7 +22,8 @@ function App() {
       <Route path='/'element={<Home/>} />
       <Route path='/disasters' element={<Disasters/>}  />
       <Route path='/shelters' element={<Shelters/>}/>
-      <Route path='/userauth' element={<UserAuth/>} />
+      <Route path='/userlogin' element={<Userlogin/>} />
+      <Route path='/usersignup' element={<UserSignup/>} />
     </Routes>
    
     </>

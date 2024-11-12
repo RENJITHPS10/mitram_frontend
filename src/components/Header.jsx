@@ -15,7 +15,7 @@ function Header() {
     const handleLogin = () => {
         toast(
             <div className="p-4 bg-gradient-to-r from-gray-900 to-gray-800 rounded-3xl shadow-lg">
-                <Link to={'/userauth'}>
+                <Link to={'/userlogin'}>
                     <button className="w-full bg-white text-blue-600 font-semibold rounded-xl py-3 transition-all duration-300 hover:bg-sky hover:text-white shadow-md hover:scale-105 mb-3">
                         USER
                     </button>
@@ -77,7 +77,7 @@ function Header() {
                 draggable={false}
                 theme="dark"
                 transition:Slide
-                style={{ marginTop: '60px', marginLeft: '150px' }}
+                style={{ marginTop: '60px'}}
             />
         </>
     );

@@ -13,7 +13,7 @@ export default {
         'help1': 'linear-gradient(to bottom,rgb(0 0 0 / 50%), rgb(0 0 0 / 50%)),url("/help1.jpg")',
         'disastercover': 'linear-gradient(to bottom,rgb(0 0 0 / 50%), rgb(0 0 0 / 50%)),url("/flood.jpg")',
         'sheltercover': 'linear-gradient(to bottom,rgb(0 0 0 / 50%), rgb(0 0 0 / 50%)),url("/camp.jpg")',
-        'logincover': 'linear-gradient(to bottom, rgba(0, 0, 255, 0.1), rgba(0, 0, 255, 0.3)), url("/logincover.jpg")'
+        'logincover': 'linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url("/logincover.jpg")'
 
 
       },
