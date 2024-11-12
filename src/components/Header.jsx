@@ -20,9 +20,11 @@ function Header() {
                         USER
                     </button>
                 </Link>
-                <button className="w-full bg-white text-blue-600 font-semibold rounded-xl py-3 transition-all duration-300 hover:bg-sky hover:text-white shadow-md hover:scale-105">
-                    VOLUNTEER
-                </button>
+              <Link to={'/volunteerlogin'}>
+                    <button className="w-full bg-white text-blue-600 font-semibold rounded-xl py-3 transition-all duration-300 hover:bg-sky hover:text-white shadow-md hover:scale-105">
+                        VOLUNTEER
+                    </button>
+              </Link>
             </div>
 
         );
