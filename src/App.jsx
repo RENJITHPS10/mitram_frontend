@@ -11,6 +11,8 @@ import Userlogin from './pages/Userlogin';
 import UserSignup from './pages/UserSignup';
 import Volunteerlogin from './pages/Volunteerlogin';
 import VolunteerSignup from './pages/VolunteerSignup';
+import Disasterguide from './pages/Disasterguide';
+import UserDashboard from './pages/UserDashboard';
 
 
 AOS.init(); 
@@ -28,6 +30,8 @@ function App() {
       <Route path='/usersignup' element={<UserSignup/>} />
       <Route path='/volunteerlogin' element={<Volunteerlogin/>} />
       <Route path='/volunteersignup' element={<VolunteerSignup/>} />
+      <Route path='/disasterguide' element={<Disasterguide/>} />
+      <Route path='/userdashboard' element={<UserDashboard/>}/>
     </Routes>
    
     </>
