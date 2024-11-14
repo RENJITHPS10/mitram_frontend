@@ -17,7 +17,7 @@ function Adminsidebar() {
                 <Link to={'/disastermngm'}>
                     <h1 className='text-xl text-white p-5'>
                         <FontAwesomeIcon icon={faTriangleExclamation} className='me-2 text-yellow-400' />
-                        Report Disaster
+                        Disaster Management
                     </h1>
                 </Link>
                 <Link to={'/volunteermngm'}>
