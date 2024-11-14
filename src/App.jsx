@@ -12,8 +12,11 @@ import UserSignup from './pages/UserSignup';
 import Volunteerlogin from './pages/Volunteerlogin';
 import VolunteerSignup from './pages/VolunteerSignup';
 import Disasterguide from './pages/Disasterguide';
-import AdminDashboard from './pages/AdminDashboard';
 import ShelterManagement from './pages/ShelterManagement';
+import Usermanagement from './pages/Usermanagement';
+import Volunteermanagement from './pages/Volunteermanagement';
+import HelpRequest from './pages/HelpRequest';
+import DisasterManagement from './pages/DisasterManagement';
 
 
 
@@ -33,8 +36,11 @@ function App() {
       <Route path='/volunteerlogin' element={<Volunteerlogin/>} />
       <Route path='/volunteersignup' element={<VolunteerSignup/>} />
       <Route path='/disasterguide' element={<Disasterguide/>} />
-      <Route path='/admin' element={<AdminDashboard/>}/>
       <Route path='/sheltermngm' element={<ShelterManagement/>}/>
+      <Route path='/usermngm' element={<Usermanagement/>}/>
+      <Route path='/volunteermngm'element={<Volunteermanagement/>}/>
+      <Route path='/helprequest' element={<HelpRequest/>}/>
+      <Route path='/disastermngm' element={<DisasterManagement/>}/>
 
      
     </Routes>

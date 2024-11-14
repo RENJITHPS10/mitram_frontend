@@ -60,7 +60,7 @@ function Header() {
             </div >
 
             {/* Mobile View */}
-            <div div className={`fixed top-20 right-0 lg:hidden bg-black font-semibold w-40 h-full shadow-lg transition-transform duration-500 z-10 ease-in-out transform ${show ? 'translate-x-0' : 'translate-x-full'
+            <div  className={`fixed top-20 right-0 lg:hidden bg-black font-semibold w-40 h-full shadow-lg transition-transform duration-500 z-10 ease-in-out transform ${show ? 'translate-x-0' : 'translate-x-full'
                 }`
             }
             >
