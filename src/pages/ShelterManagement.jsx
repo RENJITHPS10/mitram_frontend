@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import AdminHeader from '../components/AdminHeader'
-import { faCircleXmark, faEdit, faTrash, faTriangleExclamation, faUsers } from '@fortawesome/free-solid-svg-icons'
+import {  faEdit, faHouseCircleCheck, faTrash} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Adminsidebar from '../components/Adminsidebar'
+import ShelterModal from '../components/ShelterModal'
+import { modalResponseContext } from '../context/Contextshare'
 
 
 function ShelterManagement() {
+  const {setIsModalOpen}=useContext(modalResponseContext)
+  
 
   return (
     <>
@@ -13,13 +17,22 @@ function ShelterManagement() {
 
       <AdminHeader />
       <div className='flex'>
-        <Adminsidebar/>
+        <Adminsidebar />
+
         <div className='bg-gray-950  w-full '>
+
           <div className='flex justify-center  h-screen pt-28'>
 
 
             <div className="relative overflow-x-auto  max-w-6xl  sm:rounded-lg">
-          <div className='overflow-x-auto'>
+              <div className="flex justify-end">
+                <button className="text-white bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 rounded-xl px-6 py-3 font-semibold   hover:shadow-xl transition duration-300 ease-in-out mb-2" onClick={setIsModalOpen}>
+                  <FontAwesomeIcon icon={faHouseCircleCheck} className="mr-2" />
+                  ADD SHELTER
+                </button>
+              </div>
+
+              <div className='overflow-x-auto'>
                 <table className="w-full text-sm text-left   shadow-xl text-gray-500 dark:text-gray-400">
                   <thead className="text-xs text-gray-700   bg-gray-900 dark:text-gray-400 uppercase">
                     <tr>
@@ -63,11 +76,11 @@ function ShelterManagement() {
                         </button>
                       </td>
                     </tr>
-  
-  
+
+
                   </tbody>
                 </table>
-          </div>
+              </div>
             </div>
 
 
@@ -76,6 +89,9 @@ function ShelterManagement() {
 
 
       </div>
+      <ShelterModal/>
+
+
 
 
 

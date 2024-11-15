@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Adminsidebar from '../components/Adminsidebar';
 import AdminHeader from '../components/AdminHeader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrash, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faTriangleExclamation, faXmark } from '@fortawesome/free-solid-svg-icons';
+import DisasterModal from '../components/DisasterModal';
+import { modalResponseContext } from '../context/Contextshare';
 
 function DisasterManagement() {
   // State to control the modal visibility
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  
+const {setIsModalOpen}=useContext(modalResponseContext)
 
- 
- 
+
+
+
 
 
 
@@ -67,63 +69,7 @@ function DisasterManagement() {
         </div>
       </div>
 
-      {/* Modal for Reporting Disaster */}
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white rounded-lg shadow-lg p-6 w-1/3">
-            <h2 className="text-2xl font-semibold mb-4">Report a Disaster</h2>
-            <form >
-              <div className="mb-4">
-                <label htmlFor="disasterType" className="block text-lg mb-2">Disaster Type</label>
-                <input
-                  type="text"
-              
-                  className="w-full px-4 py-2 border rounded-md"
-                  placeholder="Enter disaster type"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="location" className="block text-lg mb-2">Location</label>
-                <input
-                  type="text"
-                  id="location"
-                  name="location"
-                
-                  className="w-full px-4 py-2 border rounded-md"
-                  placeholder="Enter location"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="affectedAreas" className="block text-lg mb-2">Affected Areas</label>
-                <textarea
-                  id="affectedAreas"
-                  name="affectedAreas"
-                
-                  className="w-full px-4 py-2 border rounded-md"
-                  placeholder="Enter affected areas"
-                  required
-                ></textarea>
-              </div>
-              <div className="flex justify-end space-x-4">
-                <button
-                  onClick={() => setIsModalOpen(false)}
-                  className="px-5 py-2 bg-gray-500 text-white rounded-md"
-                >
-                  Close
-                </button>
-                <button
-
-                  className="px-5 py-2 bg-blue-500 text-white rounded-md"
-                >
-                  Submit
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+    <DisasterModal />
     </>
   );
 }

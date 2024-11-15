@@ -37,7 +37,7 @@ function App() {
       <Route path='/volunteersignup' element={<VolunteerSignup/>} />
       <Route path='/disasterguide' element={<Disasterguide/>} />
       <Route path='/sheltermngm' element={<ShelterManagement/>}/>
-      <Route path='/usermngm' element={<Usermanagement/>}/>
+      <Route path='/admin' element={<Usermanagement/>}/>
       <Route path='/volunteermngm'element={<Volunteermanagement/>}/>
       <Route path='/helprequest' element={<HelpRequest/>}/>
       <Route path='/disastermngm' element={<DisasterManagement/>}/>
