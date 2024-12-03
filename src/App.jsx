@@ -17,6 +17,7 @@ import Usermanagement from './pages/Usermanagement';
 import Volunteermanagement from './pages/Volunteermanagement';
 import HelpRequest from './pages/HelpRequest';
 import DisasterManagement from './pages/DisasterManagement';
+import AdminAuth from './pages/AdminAuth';
 
 
 
@@ -37,12 +38,11 @@ function App() {
       <Route path='/volunteersignup' element={<VolunteerSignup/>} />
       <Route path='/disasterguide' element={<Disasterguide/>} />
       <Route path='/sheltermngm' element={<ShelterManagement/>}/>
-      <Route path='/admin' element={<Usermanagement/>}/>
+      <Route path='/admin' element={<AdminAuth/>}/>
+      <Route path='/usermngm' element={<Usermanagement/>}/>
       <Route path='/volunteermngm'element={<Volunteermanagement/>}/>
       <Route path='/helprequest' element={<HelpRequest/>}/>
       <Route path='/disastermngm' element={<DisasterManagement/>}/>
-
-     
     </Routes>
    
     </>

@@ -9,11 +9,11 @@ function UserSignup() {
             <div className="bg-logincover bg-no-repeat bg-cover bg-center">
                 {/* Back to Home Button (Optional) */}
                 <Link to={'/'}>
-          <button className="absolute md:top-1 md:left-64 md:bg-gradient-to-r from-[#3182CE] to-[#066bb4] px-6 py-2 text-white text-xl hover:from-[#2563EB] hover:to-[#1E40AF] transition duration-300 rounded-full">
-            <FontAwesomeIcon icon={faBackward} className="me-2" />
-            Back to Home
-          </button>
-        </Link>
+                    <button className="absolute md:top-1 md:left-64 md:bg-gradient-to-r from-[#3182CE] to-[#066bb4] px-6 py-2 text-white text-xl hover:from-[#2563EB] hover:to-[#1E40AF] transition duration-300 rounded-full">
+                        <FontAwesomeIcon icon={faBackward} className="me-2" />
+                        Back to Home
+                    </button>
+                </Link>
 
                 <div className="grid md:grid-cols-2 items-center md:px-60 md:h-screen">
                     {/* Left Section */}
