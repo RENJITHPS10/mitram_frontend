@@ -10,15 +10,30 @@ export const getallshelterApi=async()=>{
     return await commonApi('GET',`${serverUrl}/all-shelter`)
 }
 export const userregisterApi=async(reqBody, reqHeaders)=>{
-    return await commonApi('POST',`${serverUrl}/user-register`,reqBody, reqHeaders)
+    return await commonApi('POST',`${serverUrl}/register`,reqBody, reqHeaders)
+}
+
+export const userloginApi=async(reqBody)=>{
+    return await commonApi('POST',`${serverUrl}/login`,reqBody)
 }
 
 // admin side api
 // ---------------------
-export const getallpendinguserAPi=async()=>{
-    return await commonApi('GET',`${serverUrl}/admin/pending-users`)
+export const adminloginApi=async(reqBody)=>{
+    return await commonApi('POST',`${serverUrl}/adminlogin`,reqBody)
 }
 
-export const approveuserApi=async(userId)=>{
-    return await commonApi('PATCH',`${serverUrl}/admin/approve-user/${userId}`)
-}
+// allApi.js
+export const approveuserApi = async (userId, reqHeader) => {
+    return await commonApi('PATCH', `${serverUrl}/admin/approve-user/${userId}`,'', reqHeader); // Pass an empty object for PATCH request body
+};
+
+
+export const rejectUserApi = async (userId, reqHeader) => {
+    return await commonApi('PATCH', `${serverUrl}/admin/reject-user/${userId}`, '', reqHeader);
+};
+
+export const getallpendinguserAPi = async (reqHeader) => {
+    return await commonApi('GET', `${serverUrl}/admin/pending-users`, '', reqHeader);
+};
+

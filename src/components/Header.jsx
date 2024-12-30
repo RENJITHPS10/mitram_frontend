@@ -1,12 +1,13 @@
 import { faBars, faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
-import { Slide, ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Header() {
     const [show, setShow] = useState(false);
+    const navigate = useNavigate();
 
     const toggleMenu = () => {
         setShow(!show);
@@ -26,10 +27,16 @@ function Header() {
                     </button>
               </Link>
             </div>
-
         );
-
     };
+
+    const handleLogout = () => {
+        sessionStorage.removeItem('token');
+        navigate('/');
+    };
+
+    // Check if token is available in sessionStorage
+    const isLoggedIn = sessionStorage.getItem('token');
 
     return (
         <>
@@ -42,37 +49,47 @@ function Header() {
                         <Link to={'/'}><h1 className='md:me-20 me-5'>Home</h1></Link>
                         <Link to={'/disasters'}><h1 className='md:me-20 me-5'>Disasters</h1></Link>
                         <Link to={'/shelters'}><h1 className='md:me-20 me-5'>Shelters</h1></Link>
-                        <button className="bg-sky-500 text-white rounded-full font-semibold hidden md:flex px-8 pb-2 pt-1 me-5 transition-all duration-300 hover:bg-sky border border-sky hover:shadow-lg group"
-                            onClick={handleLogin}  >
-                            <div className='flex items-center text-sky group-hover:text-white'> <FontAwesomeIcon icon={faUser} className='me-2 ' />    Login</div>
-                        </button>
-                        {/* <button className="bg-sky-500 text-white rounded-full font-semibold hidden md:flex px-8 pb-2 pt-1 me-5 transition-all duration-300 hover:bg-red-600 border border-sky hover:shadow-lg group"
-                              >
-                            <div className='flex items-center text-sky group-hover:text-white'> <FontAwesomeIcon icon={faRightFromBracket} className='me-2 mt-1' />    Logout</div>
-                        </button> */}
-
-
+                        
+                        {!isLoggedIn ? (
+                            <button 
+                                className="bg-sky-500 text-white rounded-full font-semibold hidden md:flex px-8 pb-2 pt-1 me-5 transition-all duration-300 hover:bg-sky border border-sky hover:shadow-lg group"
+                                onClick={handleLogin}
+                            >
+                                <div className='flex items-center text-sky group-hover:text-white'> 
+                                    <FontAwesomeIcon icon={faUser} className='me-2 ' /> 
+                                    Login
+                                </div>
+                            </button>
+                        ) : (
+                            <button 
+                                className="bg-sky-600 text-white rounded-full font-semibold hidden md:flex px-8 pb-2 pt-1 me-5 transition-all duration-300 hover:bg-red-500 border border-sky hover:shadow-lg group"
+                                onClick={handleLogout}
+                            >
+                                <div className='flex items-center text-sky group-hover:text-white'> 
+                                    <FontAwesomeIcon icon={faRightFromBracket} className='me-2 mt-1' /> 
+                                    Logout
+                                </div>
+                            </button>
+                        )}
                     </div>
                     <div className='md:hidden' onClick={toggleMenu}>
                         <FontAwesomeIcon icon={faBars} className='text-sky fa-xl me-5' />
                     </div>
                 </div>
-            </div >
+            </div>
 
             {/* Mobile View */}
-            <div  className={`fixed top-20 right-0 lg:hidden bg-black font-semibold w-40 h-full shadow-lg transition-transform duration-500 z-10 ease-in-out transform ${show ? 'translate-x-0' : 'translate-x-full'
-                }`
-            }
+            <div 
+                className={`fixed top-20 right-0 lg:hidden bg-black font-semibold w-40 h-full shadow-lg transition-transform duration-500 z-10 ease-in-out transform ${show ? 'translate-x-0' : 'translate-x-full'}`}
             >
                 <div className='p-5'>
                     <Link to={'/'} onClick={toggleMenu} className='text-lg text-white '><p className='mt-1'>Home </p></Link>
                     <Link to={'/disasters'} onClick={toggleMenu} className='text-lg text-white '><p className='mt-1'>Disasters</p></Link>
                     <Link to={'/shelters'} onClick={toggleMenu} className='text-lg text-white'><p className='mt-1'>Shelters</p></Link>
                 </div>
-            </div >
+            </div>
 
-
-            < ToastContainer
+            <ToastContainer
                 position="top-right"
                 autoClose={false}
                 limit={1}
@@ -82,7 +99,7 @@ function Header() {
                 pauseOnFocusLoss={false}
                 draggable={false}
                 theme="dark"
-                transition:Slide
+                transition="Slide"
                 style={{ marginTop: '60px'}}
             />
         </>
