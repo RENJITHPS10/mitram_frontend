@@ -1,19 +1,32 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useState } from 'react';
 
-
-
-export const modalResponseContext = createContext({})
+export const modalResponseContext = createContext({
+    isModalOpen: false,
+    setIsModalOpen: () => {},
+    disasters: [],
+    setDisasters: () => {},
+    selectedDisaster: null, // Add this line
+    setSelectedDisaster: () => {} // Add this line
+});
 
 function Contextshare({ children }) {
-    const [isModalOpen, setIsModalOpen] = useState(false)
-    return (
-        <>
-            <modalResponseContext.Provider value={{ isModalOpen, setIsModalOpen }}>
-                {children}
-            </modalResponseContext.Provider>
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [disasters, setDisasters] = useState([]);
+    const [selectedDisaster, setSelectedDisaster] = useState(null); // Add selectedDisaster state
 
-        </>
-    )
+    return (
+        <modalResponseContext.Provider value={{
+            isModalOpen,
+            setIsModalOpen,
+            disasters,
+            setDisasters,
+            selectedDisaster, 
+            setSelectedDisaster // Pass it down through context
+        }}>
+            {children}
+        </modalResponseContext.Provider>
+    );
 }
 
-export default Contextshare
+export default Contextshare;
+

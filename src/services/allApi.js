@@ -16,6 +16,17 @@ export const userregisterApi=async(reqBody, reqHeaders)=>{
 export const userloginApi=async(reqBody)=>{
     return await commonApi('POST',`${serverUrl}/login`,reqBody)
 }
+export const reportdisasterApi=async(reqBody,reqHeader)=>{
+    return await commonApi('POST',`${serverUrl}/user-reportdisaster`,reqBody,reqHeader)
+
+}
+export const getusersdisaster=async(reqHeader)=>{
+    return await commonApi('GET',`${serverUrl}/user/disasters`,'',reqHeader)
+}
+export const updateusersdisasterApi = async (disasterId, reqBody, reqHeader) => {
+    return await commonApi('PUT', `${serverUrl}/disasters/${disasterId}`, reqBody, reqHeader);
+};
+
 
 // admin side api
 // ---------------------
