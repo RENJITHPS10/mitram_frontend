@@ -7,7 +7,7 @@ function Adminsidebar() {
 
     return (
         <>
-            <div className='bg-black h-screen w-96 pt-28 hidden md:block'>
+            <div className='bg-black  w-96 pt-28 hidden md:block'>
                 <Link to={'/usermngm'}>
                     <h1 className='text-xl text-white p-5'>
                         <FontAwesomeIcon icon={faUsers} className='me-2 text-blue-500' />

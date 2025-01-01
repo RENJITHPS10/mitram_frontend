@@ -51,7 +51,7 @@ function Userlogin() {
 
             // Redirect to home after successful login
             setTimeout(() => {
-                navigate('/');
+                navigate('/userdashboard');
             }, 2000); // Adjust delay as needed
         } else if (result.status === 403) {
             // If user is not approved, show appropriate message

@@ -125,44 +125,50 @@ function Usermanagement() {
                     <div className='flex justify-center h-screen pt-28'>
                         <div className="relative sm:rounded-lg overflow-x-auto w-full max-w-6xl">
                             <div className="overflow-x-auto">
-                                <table className="min-w-full text-sm text-left shadow-xl text-gray-500 dark:text-gray-400">
-                                    <thead className="text-xs text-gray-700 bg-gray-900 dark:text-gray-400">
-                                        <tr>
-                                            <th scope="col" className="md:px-14 px-5 md:py-3 text-xl">SI_NO</th>
-                                            <th scope="col" className="md:px-14 px-5 md:py-3 text-xl">USERNAME</th>
-                                            <th scope="col" className="md:px-14 px-5 md:py-3 text-xl">EMAIL</th>
-                                            <th scope="col" className="md:px-14 px-5 md:py-3 text-xl">PROOF</th>
-                                            <th scope="col" className="md:px-14 px-5 md:py-3 text-xl">ACTION</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {pendingUsers.map((user, index) => (
-                                            <tr key={user._id} className="border-b bg-slate-800 border-gray-700 hover:bg-gray-800">
-                                                <th scope="row" className="md:px-14 px-5 py-2 text-lg font-medium text-gray-900 whitespace-nowrap dark:text-white">{index + 1}</th>
-                                                <td className="md:px-14 px-5 py-2 text-lg">{user.username}</td>
-                                                <td className="md:px-14 px-5 py-2 text-lg">{user.email}</td>
-                                                <td className="md:px-14 px-5 py-2 text-lg">
-                                                    <img
-                                                        src={`${serverUrl}/${user.proof.filepath}`}
-                                                        alt="proof"
-                                                        className="h-20 w-20 rounded-full cursor-pointer"
-                                                        onClick={() => openModal(`${serverUrl}/${user.proof.filepath}`)} // Open modal on click
-                                                    />
-                                                </td>
-                                                <td className="md:px-14 px-5 py-2 text-lg">
-                                                    <div className="flex">
-                                                        <button onClick={() => handleRejectUser(user._id)}>
-                                                            <FontAwesomeIcon icon={faCircleXmark} className="text-red-700 fa-2x" />
-                                                        </button>
-                                                        <button onClick={() => handleApproveUser(user._id)} className="ms-4">
-                                                            <FontAwesomeIcon icon={faCircleCheck} className="text-green-700 fa-2x" />
-                                                        </button>
-                                                    </div>
-                                                </td>
+                                {pendingUsers.length === 0 ? (
+                                    <div className="text-center py-10 text-white text-2xl bg-gray-800 rounded-lg shadow-xl">
+                                        <h2>No Pending Users at the Moment</h2>
+                                    </div>
+                                ) : (
+                                    <table className="min-w-full text-sm text-left shadow-xl text-gray-500 dark:text-gray-400">
+                                        <thead className="text-xs text-gray-700 bg-gray-900 dark:text-gray-400">
+                                            <tr>
+                                                <th scope="col" className="md:px-14 px-5 md:py-3 text-xl">SI_NO</th>
+                                                <th scope="col" className="md:px-14 px-5 md:py-3 text-xl">USERNAME</th>
+                                                <th scope="col" className="md:px-14 px-5 md:py-3 text-xl">EMAIL</th>
+                                                <th scope="col" className="md:px-14 px-5 md:py-3 text-xl">PROOF</th>
+                                                <th scope="col" className="md:px-14 px-5 md:py-3 text-xl">ACTION</th>
                                             </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            {pendingUsers.map((user, index) => (
+                                                <tr key={user._id} className="border-b bg-slate-800 border-gray-700 hover:bg-gray-800">
+                                                    <th scope="row" className="md:px-14 px-5 py-2 text-lg font-medium text-gray-900 whitespace-nowrap dark:text-white">{index + 1}</th>
+                                                    <td className="md:px-14 px-5 py-2 text-lg">{user.username}</td>
+                                                    <td className="md:px-14 px-5 py-2 text-lg">{user.email}</td>
+                                                    <td className="md:px-14 px-5 py-2 text-lg">
+                                                        <img
+                                                            src={`${serverUrl}/${user.proof.filepath}`}
+                                                            alt="proof"
+                                                            className="h-20 w-20 rounded-full cursor-pointer"
+                                                            onClick={() => openModal(`${serverUrl}/${user.proof.filepath}`)} // Open modal on click
+                                                        />
+                                                    </td>
+                                                    <td className="md:px-14 px-5 py-2 text-lg">
+                                                        <div className="flex">
+                                                            <button onClick={() => handleRejectUser(user._id)}>
+                                                                <FontAwesomeIcon icon={faCircleXmark} className="text-red-700 fa-2x" />
+                                                            </button>
+                                                            <button onClick={() => handleApproveUser(user._id)} className="ms-4">
+                                                                <FontAwesomeIcon icon={faCircleCheck} className="text-green-700 fa-2x" />
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                )}
                             </div>
                         </div>
 

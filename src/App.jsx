@@ -19,6 +19,7 @@ import HelpRequest from './pages/HelpRequest';
 import DisasterManagement from './pages/DisasterManagement';
 import AdminAuth from './pages/AdminAuth';
 import UserDashboard from './pages/UserDashboard';
+import Pagenotfound from './pages/Pagenotfound';
 
 
 
@@ -45,6 +46,7 @@ function App() {
       <Route path='/volunteermngm'element={<Volunteermanagement/>}/>
       <Route path='/helprequest' element={<HelpRequest/>}/>
       <Route path='/disastermngm' element={<DisasterManagement/>}/>
+      <Route path='*' element={<Pagenotfound />} />
     </Routes>
    
     </>

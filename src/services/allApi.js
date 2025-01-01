@@ -26,6 +26,26 @@ export const getusersdisaster=async(reqHeader)=>{
 export const updateusersdisasterApi = async (disasterId, reqBody, reqHeader) => {
     return await commonApi('PUT', `${serverUrl}/disasters/${disasterId}`, reqBody, reqHeader);
 };
+export const deleteUserDisaster = async(id, reqHeader) => {
+    return await commonApi('DELETE',`${serverUrl}/delete-disasters/${id}`,null, reqHeader);
+};
+
+export const createHelpRequestApi = async (reqBody, reqHeader) => {
+    return await commonApi('POST',`${serverUrl}/helprequest`, reqBody, reqHeader);
+};
+
+export const getUsersHelpRequests = async (reqHeader) => {
+    return await commonApi('GET', `${serverUrl}/userhelprequest`, null, reqHeader);
+};
+export const updateUsersHelpRequests=async(id,reqBody,reqHeader)=>{
+    return await commonApi('PUT', `${serverUrl}/updatehelprequest/${id}`, reqBody, reqHeader);
+
+}
+
+export const deleteUserHelpRequest = async (helpRequestId, reqHeader) => {
+    return await commonApi('DELETE', `${serverUrl}/deletehelprequest/${helpRequestId}`, null, reqHeader);
+};
+
 
 
 // admin side api

@@ -68,7 +68,8 @@ function DisasterModal() {
         });
         data.append('image', formData.image);
 
-        const token = sessionStorage.getItem('token');
+        const token = sessionStorage.getItem('token') || sessionStorage.getItem('adminToken');
+
         const headers = token ? { 'Content-Type': 'multipart/form-data', 'Authorization': `Bearer ${token}` } : { 'Content-Type': 'multipart/form-data' };
 
         try {
@@ -86,6 +87,16 @@ function DisasterModal() {
                 setIsModalOpen(false);
 
                 // Fetch updated disasters
+                setFormData({
+                    name: '',
+                    date: '',
+                    description: '',
+                    location: '',
+                    affectedarea: '',
+                    impact: '',
+                    contacts: '',
+                    image: null,
+                })
                 setDisasters([...disasters, response.data.disaster]); // You might want to modify this to fit your requirements
             } else {
                 alert('Something went wrong. Please try again');

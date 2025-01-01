@@ -1,66 +1,106 @@
-import React, { useContext, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Adminsidebar from '../components/Adminsidebar';
 import AdminHeader from '../components/AdminHeader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrash, faTriangleExclamation, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faTriangleExclamation, faEye } from '@fortawesome/free-solid-svg-icons';
 import DisasterModal from '../components/DisasterModal';
 import { modalResponseContext } from '../context/Contextshare';
+import { getalldisasterApi } from '../services/allApi';
 
 function DisasterManagement() {
-  // State to control the modal visibility
-const {setIsModalOpen}=useContext(modalResponseContext)
+  const { setIsModalOpen } = useContext(modalResponseContext);
+  const [alldisaster, setAlldisaster] = useState([]);
 
+  const getDisaster = async () => {
+    try {
+      const result = await getalldisasterApi();
+      if (result.data) {
+        setAlldisaster(result.data);
+      }
+    } catch (error) {
+      console.error('Error fetching disasters:', error);
+    }
+  };
 
-
-
-
-
+  useEffect(() => {
+    getDisaster();
+  }, []);
 
   return (
     <>
       <AdminHeader />
-      <div className='flex'>
+      <div className="flex">
         <Adminsidebar />
-        <div className='bg-gray-950 w-full'>
-          <div className='flex justify-center h-screen pt-28'>
-            <div className="relative overflow-x-auto max-w-6xl sm:rounded-lg">
-              <div className='overflow-x-auto'>
-                <div className='flex justify-end'>
-                  <button
-                    className="text-white px-5 py-2 bg-gradient-to-r from-red-500 to-red-600 rounded-lg shadow-lg hover:from-red-700 hover:to-red-800 transform transition duration-300 mb-3"
-                    onClick={() => setIsModalOpen(true)}
-                  >
-                    <FontAwesomeIcon icon={faTriangleExclamation} className='me-2 text-yellow-400 fa-xl' />
-                    Report Disaster
-                  </button>
-                </div>
-                <table className="w-full text-sm text-left shadow-xl text-gray-500 dark:text-gray-400">
-                  <thead className="text-xs text-gray-700 bg-gray-900 dark:text-gray-400 uppercase">
+        <div className="bg-gray-950 w-full">
+          <div className="flex justify-center pt-28 pb-10">
+            <div className="max-w-7xl w-full px-4 sm:px-6 lg:px-8">
+              <div className="flex justify-end mb-5">
+                <button
+                  className="text-white px-5 py-2 bg-gradient-to-r from-red-500 to-red-600 rounded-lg shadow-lg hover:from-red-700 hover:to-red-800 transition duration-300"
+                  onClick={() => setIsModalOpen(true)}
+                >
+                  <FontAwesomeIcon icon={faTriangleExclamation} className="me-2 text-yellow-400 fa-lg" />
+                  Report Disaster
+                </button>
+              </div>
+
+              <div className="overflow-x-auto shadow sm:rounded-lg">
+                <table className="w-full text-sm text-left bg-gray-900 text-gray-400">
+                  <thead className="text-xs uppercase bg-gray-800 text-gray-300">
                     <tr>
-                      <th scope="col" className="md:px-14 px-5 md:py-3 text-xl">SI_NO</th>
-                      <th scope="col" className="md:px-14 px-5 md:py-3 text-xl">Disaster Type</th>
-                      <th scope="col" className="md:px-14 px-5 md:py-3 text-xl">Location</th>
-                      <th scope="col" className="md:px-14 px-5 md:py-3 text-xl">Affected Areas</th>
-                      <th scope="col" className="md:px-14 px-5 md:py-3 text-xl">ACTIONs</th>
+                      <th className="px-6 py-3 text-lg">SI No</th>
+                      <th className="px-6 py-3 text-lg">Disaster Type</th>
+                      <th className="px-6 py-3 text-lg">Location</th>
+                      <th className="px-6 py-3 text-lg">Affected Areas</th>
+                      <th className="px-6 py-3 text-lg">Date</th>
+                      <th className="px-6 py-3 text-lg">Impact</th>
+                      <th className="px-6 py-3 text-lg">Contact</th>
+                      <th className="px-6 py-3 text-lg text-center">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr className="border-b bg-slate-800 border-gray-700 hover:bg-gray-800">
-                      <th scope="row" className="md:px-14 px-5 py-2 text-lg font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        1
-                      </th>
-                      <td className="md:px-14 px-5 py-2 text-lg">Kochi shelter</td>
-                      <td className="md:px-14 px-5 py-2 text-lg">Kochi</td>
-                      <td className="md:px-14 px-5 py-2 text-lg">Downtown, Riverside Heights, and Westside neighborhoods</td>
-                      <td className="px-6 py-4 text-center space-x-4">
-                        <button className="text-blue-500 hover:text-blue-600">
-                          <FontAwesomeIcon icon={faEdit} className='fa-2x me-2' />
-                        </button>
-                        <button className="text-red-500 hover:text-red-600">
-                          <FontAwesomeIcon icon={faTrash} className='fa-2x' />
-                        </button>
-                      </td>
-                    </tr>
+                    {alldisaster.length === 0 ? (
+                      <tr>
+                        <td colSpan="8" className="px-6 py-4 text-center text-lg text-gray-500">
+                          No disasters reported yet!
+                        </td>
+                      </tr>
+                    ) : (
+                      alldisaster.map((disaster, index) => (
+                        <tr
+                          key={disaster._id}
+                          className="border-b bg-gray-800 border-gray-700 hover:bg-gray-700"
+                        >
+                          <td className="px-6 py-4">{index + 1}</td>
+                          <td className="px-6 py-4">{disaster.type || 'N/A'}</td>
+                          <td className="px-6 py-4">{disaster.location || 'N/A'}</td>
+                          <td className="px-6 py-4">{disaster.affectedAreas || 'N/A'}</td>
+                          <td className="px-6 py-4">{new Date(disaster.date).toLocaleDateString() || 'N/A'}</td>
+                          <td className="px-6 py-4">{disaster.impact || 'N/A'}</td>
+                          <td className="px-6 py-4">{disaster.contacts || 'N/A'}</td>
+                          <td className="px-6 py-4 text-center flex justify-center space-x-4">
+                            <button
+                              title="View Details"
+                              className="text-green-500 hover:text-green-600"
+                            >
+                              <FontAwesomeIcon icon={faEye} className="fa-lg" />
+                            </button>
+                            <button
+                              title="Edit"
+                              className="text-blue-500 hover:text-blue-600"
+                            >
+                              <FontAwesomeIcon icon={faEdit} className="fa-lg" />
+                            </button>
+                            <button
+                              title="Delete"
+                              className="text-red-500 hover:text-red-600"
+                            >
+                              <FontAwesomeIcon icon={faTrash} className="fa-lg" />
+                            </button>
+                          </td>
+                        </tr>
+                      ))
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -68,8 +108,7 @@ const {setIsModalOpen}=useContext(modalResponseContext)
           </div>
         </div>
       </div>
-
-    <DisasterModal />
+      <DisasterModal />
     </>
   );
 }
