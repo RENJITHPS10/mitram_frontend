@@ -20,12 +20,7 @@ function Adminsidebar() {
                         Disaster Management
                     </h1>
                 </Link>
-                <Link to={'/volunteermngm'}>
-                    <h1 className='text-xl text-white p-5'>
-                        <FontAwesomeIcon icon={faUsers} className='me-2 text-green-500' />
-                        Volunteer Management
-                    </h1>
-                </Link>
+                
                 <Link to={'/sheltermngm'}>
                     <h1 className='text-xl text-white p-5'>
                         <FontAwesomeIcon icon={faPersonShelter} className='me-2 text-teal-500' />

@@ -54,7 +54,6 @@ export const adminloginApi=async(reqBody)=>{
     return await commonApi('POST',`${serverUrl}/adminlogin`,reqBody)
 }
 
-// allApi.js
 export const approveuserApi = async (userId, reqHeader) => {
     return await commonApi('PATCH', `${serverUrl}/admin/approve-user/${userId}`,'', reqHeader); // Pass an empty object for PATCH request body
 };
@@ -68,3 +67,9 @@ export const getallpendinguserAPi = async (reqHeader) => {
     return await commonApi('GET', `${serverUrl}/admin/pending-users`, '', reqHeader);
 };
 
+export const createshelterApi=async(reqBody,reqHeader)=>{
+    return await commonApi('POST',`${serverUrl}/admin/shelters`,reqBody,reqHeader)
+}
+export const updateshelterApi=async(id,reqBody,reqHeader)=>{
+    return await commonApi('PUT',`${serverUrl}/updateshelters/${id}`,reqBody,reqHeader)
+}

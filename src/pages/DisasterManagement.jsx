@@ -5,14 +5,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash, faTriangleExclamation, faEye } from '@fortawesome/free-solid-svg-icons';
 import DisasterModal from '../components/DisasterModal';
 import { modalResponseContext } from '../context/Contextshare';
-import { getalldisasterApi } from '../services/allApi';
+import { deleteUserDisaster, getalldisasterApi } from '../services/allApi';
+import ViewDisasterModal from '../components/ViewDisasterModal';
+import { useNavigate } from 'react-router-dom';
 
 function DisasterManagement() {
-  const { setIsModalOpen } = useContext(modalResponseContext);
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
+  const { setIsModalOpen, setSelectedDisaster ,selectedDisaster} = useContext(modalResponseContext);
   const [alldisaster, setAlldisaster] = useState([]);
+  const navigate=useNavigate()
 
   const getDisaster = async () => {
     try {
+      const token=sessionStorage.getItem('adminToken')
+      if(!token){
+        navigate('*')
+        
+      }
       const result = await getalldisasterApi();
       if (result.data) {
         setAlldisaster(result.data);
@@ -21,6 +30,34 @@ function DisasterManagement() {
       console.error('Error fetching disasters:', error);
     }
   };
+  const handleEditDisaster = (disaster) => {
+    setSelectedDisaster(disaster);
+    setIsModalOpen(true);
+  };
+  const handleDeleteDisaster = async (disasterId) => {
+    const token = sessionStorage.getItem('adminToken')
+    console.log(token)
+    try {
+      const reqHeader = { Authorization: `Bearer ${token}` };
+      const response = await deleteUserDisaster(disasterId, reqHeader);
+
+      // Check if the response indicates success
+      if (response.status === 200) {
+        setAlldisaster((prev) => prev.filter((disaster) => disaster._id !== disasterId));
+        alert('Disaster report deleted successfully.');
+      } else {
+        alert(response.data.message || 'Failed to delete disaster report. Please try again later.');
+      }
+    } catch (err) {
+      console.error('Error deleting disaster:', err); // Log error to console for debugging
+      alert('Failed to delete disaster report. Please try again later.');
+    }
+  };
+  const handleViewDisaster = (disaster) => {
+    setSelectedDisaster(disaster);
+    setIsViewModalOpen(true);
+};
+
 
   useEffect(() => {
     getDisaster();
@@ -81,17 +118,19 @@ function DisasterManagement() {
                           <td className="px-6 py-4 text-center flex justify-center space-x-4">
                             <button
                               title="View Details"
+                              onClick={() => handleViewDisaster(disaster)}
                               className="text-green-500 hover:text-green-600"
                             >
                               <FontAwesomeIcon icon={faEye} className="fa-lg" />
                             </button>
-                            <button
+
+                            <button onClick={() => handleEditDisaster(disaster)}
                               title="Edit"
                               className="text-blue-500 hover:text-blue-600"
                             >
                               <FontAwesomeIcon icon={faEdit} className="fa-lg" />
                             </button>
-                            <button
+                            <button onClick={() => handleDeleteDisaster(disaster._id)}
                               title="Delete"
                               className="text-red-500 hover:text-red-600"
                             >
@@ -109,6 +148,12 @@ function DisasterManagement() {
         </div>
       </div>
       <DisasterModal />
+      <ViewDisasterModal
+        isOpen={isViewModalOpen}
+        disasterDetails={selectedDisaster}
+        onClose={() => setIsViewModalOpen(false)}
+      />
+
     </>
   );
 }

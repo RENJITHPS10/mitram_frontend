@@ -5,19 +5,21 @@ import AdminHeader from '../components/AdminHeader'
 import Adminsidebar from '../components/Adminsidebar'
 import { approveuserApi, getallpendinguserAPi, rejectUserApi } from '../services/allApi'
 import { serverUrl } from '../services/serverUrl'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 function Usermanagement() {
     const [pendingUsers, setPendingUsers] = useState([]);
     const [selectedImage, setSelectedImage] = useState(null); // State for selected image
     const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
+    const navigate = useNavigate(); // Use navigate for redirection
 
     // Fetch Pending Users
     const fetchPendingUsers = async () => {
         try {
             const token = sessionStorage.getItem("adminToken"); // Retrieve the token
             if (!token) {
-                console.error("Token is missing");
-                return;
+                navigate('*')
+
             }
 
             const headers = {
@@ -173,19 +175,40 @@ function Usermanagement() {
                         </div>
 
                         {/* Modal for enlarged image */}
+                       
                         {isModalOpen && (
-                            <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
-                                <div className="relative">
-                                    <img src={selectedImage} alt="proof enlarged" className="max-h-[80vh] max-w-[90vw] rounded-lg" />
-                                    <button
-                                        className="absolute top-3 right-3 text-white text-3xl font-bold"
-                                        onClick={closeModal}
-                                    >
-                                        &times;
-                                    </button>
-                                </div>
-                            </div>
-                        )}
+  <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 backdrop-blur-md transition-opacity duration-300">
+    <div className="relative">
+      {/* Modal Image */}
+      <img
+        src={selectedImage}
+        alt="Proof Enlarged"
+        className="max-h-[80vh] max-w-[90vw] rounded-xl shadow-lg transition-transform duration-300 hover:scale-105"
+      />
+
+      {/* Close Button */}
+      <button
+        className="absolute top-3 right-3 bg-gray-800 text-white rounded-full p-2 w-10 h-10 flex items-center justify-center shadow-lg hover:bg-gray-700 hover:scale-110 transition-transform duration-300"
+        onClick={closeModal}
+        aria-label="Close Modal"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          className="w-6 h-6"
+        >
+          <path
+            fillRule="evenodd"
+            d="M5.47 4.47a.75.75 0 011.06 0L12 9.94l5.47-5.47a.75.75 0 011.06 1.06L13.06 12l5.47 5.47a.75.75 0 01-1.06 1.06L12 14.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+)}
+
                     </div>
                 </div>
             </div>
