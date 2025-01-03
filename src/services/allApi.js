@@ -73,3 +73,17 @@ export const createshelterApi=async(reqBody,reqHeader)=>{
 export const updateshelterApi=async(id,reqBody,reqHeader)=>{
     return await commonApi('PUT',`${serverUrl}/updateshelters/${id}`,reqBody,reqHeader)
 }
+export const deleteshelterApi=async(id,reqHeader)=>{
+    return await commonApi('DELETE',`${serverUrl}/deleteshelter/${id}`,'',reqHeader)
+}
+export const gethelprequesApi=async(reqHeader)=>{
+    return await commonApi('GET',`${serverUrl}/allhelprequest`,'',reqHeader)
+}
+export const updateHelpRequestApi = async (id, reqBody, reqHeader) => {
+    return await commonApi('PATCH', `${serverUrl}/allhelprequest/${id}`, reqBody, reqHeader);
+};
+// Delete a help request API
+export const deleteHelpRequestApi = async (id, reqHeader) => {
+    return await commonApi('DELETE', `${serverUrl}/allhelprequest/${id}`, '', reqHeader);
+};
+

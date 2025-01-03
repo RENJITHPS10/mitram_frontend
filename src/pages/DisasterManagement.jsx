@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import Adminsidebar from '../components/Adminsidebar';
 import AdminHeader from '../components/AdminHeader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrash, faTriangleExclamation, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faEye } from '@fortawesome/free-solid-svg-icons';
 import DisasterModal from '../components/DisasterModal';
 import { modalResponseContext } from '../context/Contextshare';
 import { deleteUserDisaster, getalldisasterApi } from '../services/allApi';
@@ -13,35 +13,34 @@ function DisasterManagement() {
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
   const { setIsModalOpen, setSelectedDisaster ,selectedDisaster} = useContext(modalResponseContext);
   const [alldisaster, setAlldisaster] = useState([]);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   const getDisaster = async () => {
     try {
-      const token=sessionStorage.getItem('adminToken')
-      if(!token){
-        navigate('*')
-        
+      const token = sessionStorage.getItem('adminToken');
+      if (!token) {
+        navigate('*');
       }
       const result = await getalldisasterApi();
       if (result.data) {
-        setAlldisaster(result.data);
+        setAlldisaster(result.data.data);
       }
     } catch (error) {
       console.error('Error fetching disasters:', error);
     }
   };
+
   const handleEditDisaster = (disaster) => {
     setSelectedDisaster(disaster);
     setIsModalOpen(true);
   };
+
   const handleDeleteDisaster = async (disasterId) => {
-    const token = sessionStorage.getItem('adminToken')
-    console.log(token)
+    const token = sessionStorage.getItem('adminToken');
     try {
       const reqHeader = { Authorization: `Bearer ${token}` };
       const response = await deleteUserDisaster(disasterId, reqHeader);
 
-      // Check if the response indicates success
       if (response.status === 200) {
         setAlldisaster((prev) => prev.filter((disaster) => disaster._id !== disasterId));
         alert('Disaster report deleted successfully.');
@@ -49,15 +48,15 @@ function DisasterManagement() {
         alert(response.data.message || 'Failed to delete disaster report. Please try again later.');
       }
     } catch (err) {
-      console.error('Error deleting disaster:', err); // Log error to console for debugging
+      console.error('Error deleting disaster:', err);
       alert('Failed to delete disaster report. Please try again later.');
     }
   };
+
   const handleViewDisaster = (disaster) => {
     setSelectedDisaster(disaster);
     setIsViewModalOpen(true);
-};
-
+  };
 
   useEffect(() => {
     getDisaster();
@@ -76,7 +75,7 @@ function DisasterManagement() {
                   className="text-white px-5 py-2 bg-gradient-to-r from-red-500 to-red-600 rounded-lg shadow-lg hover:from-red-700 hover:to-red-800 transition duration-300"
                   onClick={() => setIsModalOpen(true)}
                 >
-                  <FontAwesomeIcon icon={faTriangleExclamation} className="me-2 text-yellow-400 fa-lg" />
+                  <FontAwesomeIcon icon={faEye} className="me-2 text-yellow-400 fa-lg" />
                   Report Disaster
                 </button>
               </div>
@@ -86,19 +85,16 @@ function DisasterManagement() {
                   <thead className="text-xs uppercase bg-gray-800 text-gray-300">
                     <tr>
                       <th className="px-6 py-3 text-lg">SI No</th>
-                      <th className="px-6 py-3 text-lg">Disaster Type</th>
+                      <th className="px-6 py-3 text-lg">Name</th>
                       <th className="px-6 py-3 text-lg">Location</th>
-                      <th className="px-6 py-3 text-lg">Affected Areas</th>
                       <th className="px-6 py-3 text-lg">Date</th>
-                      <th className="px-6 py-3 text-lg">Impact</th>
-                      <th className="px-6 py-3 text-lg">Contact</th>
                       <th className="px-6 py-3 text-lg text-center">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     {alldisaster.length === 0 ? (
                       <tr>
-                        <td colSpan="8" className="px-6 py-4 text-center text-lg text-gray-500">
+                        <td colSpan="5" className="px-6 py-4 text-center text-lg text-gray-500">
                           No disasters reported yet!
                         </td>
                       </tr>
@@ -109,12 +105,9 @@ function DisasterManagement() {
                           className="border-b bg-gray-800 border-gray-700 hover:bg-gray-700"
                         >
                           <td className="px-6 py-4">{index + 1}</td>
-                          <td className="px-6 py-4">{disaster.type || 'N/A'}</td>
+                          <td className="px-6 py-4">{disaster.name || 'N/A'}</td>
                           <td className="px-6 py-4">{disaster.location || 'N/A'}</td>
-                          <td className="px-6 py-4">{disaster.affectedAreas || 'N/A'}</td>
                           <td className="px-6 py-4">{new Date(disaster.date).toLocaleDateString() || 'N/A'}</td>
-                          <td className="px-6 py-4">{disaster.impact || 'N/A'}</td>
-                          <td className="px-6 py-4">{disaster.contacts || 'N/A'}</td>
                           <td className="px-6 py-4 text-center flex justify-center space-x-4">
                             <button
                               title="View Details"
@@ -153,7 +146,6 @@ function DisasterManagement() {
         disasterDetails={selectedDisaster}
         onClose={() => setIsViewModalOpen(false)}
       />
-
     </>
   );
 }

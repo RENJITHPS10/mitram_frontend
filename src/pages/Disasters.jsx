@@ -8,7 +8,7 @@ function Disasters() {
     const getDisaster = async () => {
         try {
             const result = await getalldisasterApi();
-            setalldisaster(result.data);
+            setalldisaster(result.data.data);
         } catch (error) {
             console.error('Error fetching disasters:', error);
         }

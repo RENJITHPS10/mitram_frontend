@@ -7,66 +7,99 @@ function ViewDisasterModal({ isOpen, disasterDetails, onClose }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-70">
-      <div className="bg-gray-900 rounded-lg shadow-xl w-11/12 md:w-2/3 lg:w-1/2 overflow-hidden text-white max-h-[90%]">
+    <div
+      className={`fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 backdrop-blur-md transition duration-300 ease-in-out ${
+        isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+      }`}
+    >
+      <div
+        className="bg-gradient-to-b from-black via-gray-800 to-black rounded-lg shadow-lg w-full sm:w-4/5 md:w-2/3 lg:w-1/2 p-6 transition-all transform scale-95 sm:scale-100"
+        style={{ transition: 'transform 0.3s ease-in-out' }}
+      >
         {/* Header */}
-        <div className="flex justify-between items-center bg-gray-800 px-6 py-4">
-          <h2 className="text-xl font-semibold">Disaster Details</h2>
-          <button onClick={onClose}>
-            <FontAwesomeIcon icon={faTimesCircle} className="text-gray-400 hover:text-white fa-xl" />
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-semibold text-white">Disaster Details</h2>
+          <button
+            onClick={onClose}
+            className="text-gray-300 hover:text-red-600 transition duration-200 ease-in-out"
+          >
+            <FontAwesomeIcon icon={faTimesCircle} className="fa-lg" />
           </button>
         </div>
 
-        {/* Scrollable Content */}
-        <div className="px-6 py-5 space-y-5 overflow-y-auto max-h-[70vh]">
-          <div>
+        {/* Disaster Details */}
+        <div className="space-y-5 overflow-y-auto max-h-[60vh]">
+          {/* Reported By */}
+          <div className="border-b pb-4">
+            <strong className="text-gray-400">Reported By:</strong>
+            <div className="text-white">
+              <span>Name: {disasterDetails.reportedBy?.userId?.username || 'N/A'}</span>
+              <br />
+              <span>Email: {disasterDetails.reportedBy?.userId?.email || 'N/A'}</span>
+            </div>
+          </div>
+
+          {/* Disaster Type */}
+          <div className="border-b pb-4">
             <strong className="text-gray-400">Disaster Type:</strong>
-            <span className="block text-lg text-gray-200">{disasterDetails.type || 'N/A'}</span>
+            <span className="block text-white">{disasterDetails.type || 'N/A'}</span>
           </div>
-          <div>
+
+          {/* Location */}
+          <div className="border-b pb-4">
             <strong className="text-gray-400">Location:</strong>
-            <span className="block text-lg text-gray-200">{disasterDetails.location || 'N/A'}</span>
+            <span className="block text-white">{disasterDetails.location || 'N/A'}</span>
           </div>
-          <div>
+
+          {/* Affected Areas */}
+          <div className="border-b pb-4">
             <strong className="text-gray-400">Affected Areas:</strong>
-            <span className="block text-lg text-gray-200">{disasterDetails.affectedAreas || 'N/A'}</span>
+            <span className="block text-white">{disasterDetails.affectedAreas || 'N/A'}</span>
           </div>
-          <div>
+
+          {/* Date */}
+          <div className="border-b pb-4">
             <strong className="text-gray-400">Date:</strong>
-            <span className="block text-lg text-gray-200">
+            <span className="block text-white">
               {new Date(disasterDetails.date).toLocaleDateString() || 'N/A'}
             </span>
           </div>
-          <div>
+
+          {/* Impact */}
+          <div className="border-b pb-4">
             <strong className="text-gray-400">Impact:</strong>
-            <span className="block text-lg text-gray-200">{disasterDetails.impact || 'N/A'}</span>
+            <span className="block text-white">{disasterDetails.impact || 'N/A'}</span>
           </div>
-          <div>
+
+          {/* Contacts */}
+          <div className="border-b pb-4">
             <strong className="text-gray-400">Contacts:</strong>
-            <span className="block text-lg text-gray-200">{disasterDetails.contacts || 'N/A'}</span>
+            <span className="block text-white">{disasterDetails.contacts || 'N/A'}</span>
           </div>
+
+          {/* Image */}
           {disasterDetails.image && (
-            <div className="text-center">
+            <div className="border-b pb-4">
               <strong className="text-gray-400">Image:</strong>
               <img
                 src={`${serverUrl}/${disasterDetails.image}`}
                 alt="Disaster"
-                className="mt-3 rounded-lg shadow-lg mx-auto max-w-full"
+                className="mt-4 rounded-md shadow-md w-full"
               />
             </div>
           )}
+
+          {/* Description */}
           <div>
             <strong className="text-gray-400">Description:</strong>
-            <p className="mt-2 text-gray-300 text-base leading-relaxed">
-              {disasterDetails.description || 'N/A'}
-            </p>
+            <p className="mt-2 text-white">{disasterDetails.description || 'N/A'}</p>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="flex justify-end bg-gray-800 px-6 py-4">
+        <div className="flex justify-end mt-6">
           <button
-            className="px-6 py-2 text-sm font-semibold text-gray-900 bg-gray-100 rounded-lg shadow hover:bg-white focus:outline-none focus:ring-2 focus:ring-gray-500"
+            className="px-6 py-2 text-sm font-semibold text-white bg-red-600 rounded-lg shadow-md hover:bg-red-700 transition-all duration-300"
             onClick={onClose}
           >
             Close

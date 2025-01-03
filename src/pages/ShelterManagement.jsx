@@ -6,7 +6,7 @@ import Adminsidebar from "../components/Adminsidebar";
 import ShelterModal from "../components/ShelterModal";
 import { modalResponseContext } from "../context/Contextshare";
 import { useNavigate } from "react-router-dom";
-import { getallshelterApi } from "../services/allApi";
+import { deleteshelterApi, getallshelterApi } from "../services/allApi";
 
 function ShelterManagement() {
   const { setIsModalOpen } = useContext(modalResponseContext);
@@ -37,6 +37,28 @@ function ShelterManagement() {
     setSelectedShelter(shelter);
     setIsModalOpen(true);
   };
+  const handleDelete = async (shelterId) => {
+    if (window.confirm("Are you sure you want to delete this shelter?")) {
+      const token = sessionStorage.getItem("adminToken");
+      const reqheader={
+        'Authorization':`Bearer ${token}`
+      }
+
+      try {
+        const response = await deleteshelterApi(shelterId,reqheader);
+        if (response.status === 200) {
+          alert("Shelter deleted successfully");
+          fetchShelters(); // Refresh the shelter list
+        } else {
+          alert(`Unexpected response: ${response.statusText}`);
+        }
+      } catch (error) {
+        console.error("Error deleting shelter:", error);
+        alert("Failed to delete shelter. Please try again.");
+      }
+    }
+  };
+  
 
   return (
     <>
@@ -101,7 +123,10 @@ function ShelterManagement() {
                         >
                           <FontAwesomeIcon icon={faEdit} className="fa-2x me-2" />
                         </button>
-                        <button className="text-red-500 hover:text-red-600">
+                        <button
+                          onClick={() => handleDelete(shelter._id)}
+                          className="text-red-500 hover:text-red-600"
+                        >
                           <FontAwesomeIcon icon={faTrash} className="fa-2x" />
                         </button>
                       </td>
