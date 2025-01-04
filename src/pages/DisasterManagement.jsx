@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import Adminsidebar from '../components/Adminsidebar';
 import AdminHeader from '../components/AdminHeader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrash, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faEye, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 import DisasterModal from '../components/DisasterModal';
 import { modalResponseContext } from '../context/Contextshare';
 import { deleteUserDisaster, getalldisasterApi } from '../services/allApi';
@@ -67,7 +67,7 @@ function DisasterManagement() {
       <AdminHeader />
       <div className="flex">
         <Adminsidebar />
-        <div className="bg-gray-950 w-full">
+        <div className="bg-gray-950 w-full h-screen">
           <div className="flex justify-center pt-28 pb-10">
             <div className="max-w-7xl w-full px-4 sm:px-6 lg:px-8">
               <div className="flex justify-end mb-5">
@@ -75,7 +75,7 @@ function DisasterManagement() {
                   className="text-white px-5 py-2 bg-gradient-to-r from-red-500 to-red-600 rounded-lg shadow-lg hover:from-red-700 hover:to-red-800 transition duration-300"
                   onClick={() => setIsModalOpen(true)}
                 >
-                  <FontAwesomeIcon icon={faEye} className="me-2 text-yellow-400 fa-lg" />
+                  <FontAwesomeIcon icon={faTriangleExclamation} className="me-2 text-yellow-400 fa-lg" />
                   Report Disaster
                 </button>
               </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { getalldisasterApi } from '../services/allApi';
+import { serverUrl } from '../services/serverUrl';
 
 function Disasters() {
     const [alldisaster, setalldisaster] = useState([]);
@@ -43,7 +44,7 @@ function Disasters() {
                                             {new Date(item.date).toLocaleDateString()}
                                         </p>
                                         <img
-                                            src={item.image}
+                                            src={`${serverUrl}/${item.image}`}
                                             alt="Disaster"
                                             className="w-full h-48 object-cover mb-4 rounded-md"
                                         />

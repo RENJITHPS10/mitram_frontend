@@ -5,6 +5,7 @@ import { serverUrl } from '../services/serverUrl';
 
 function ViewDisasterModal({ isOpen, disasterDetails, onClose }) {
   if (!isOpen) return null;
+  console.log(disasterDetails)
 
   return (
     <div
@@ -33,7 +34,7 @@ function ViewDisasterModal({ isOpen, disasterDetails, onClose }) {
           <div className="border-b pb-4">
             <strong className="text-gray-400">Reported By:</strong>
             <div className="text-white">
-              <span>Name: {disasterDetails.reportedBy?.userId?.username || 'N/A'}</span>
+              <span>Name: {disasterDetails.reportedBy?.userId?.username ||disasterDetails.reportedBy?.adminId?.name }</span>
               <br />
               <span>Email: {disasterDetails.reportedBy?.userId?.email || 'N/A'}</span>
             </div>

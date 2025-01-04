@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { getallshelterApi } from '../services/allApi';
+import { serverUrl } from '../services/serverUrl';
 
 function Shelters() {
     const [allshelter,setallshelter]=useState([])
@@ -31,7 +32,7 @@ function Shelters() {
                             <div className="p-6">
                                 <h1 className="text-3xl text-center font-bold mb-2">{item.name}</h1>
                                 <p className="text-center text-gray-400 mb-4">{item.location}</p>
-                                <img src={item.image} alt="Shelter" className="w-full h-48 object-cover mb-4 rounded-md" />
+                                <img   src={`${serverUrl}/${item.image}`} alt="Shelter" className="w-full h-48 object-cover mb-4 rounded-md" />
                                 <div className="space-y-4">
                                     <p className="text-lg"><strong>Capacity:</strong> {item.capacity} people</p>
                                     <p className="text-lg"><strong>Current Occupancy:</strong> {item. current_occupancy} people</p>
