@@ -42,8 +42,8 @@ function ViewDisasterModal({ isOpen, disasterDetails, onClose }) {
 
           {/* Disaster Type */}
           <div className="border-b pb-4">
-            <strong className="text-gray-400">Disaster Type:</strong>
-            <span className="block text-white">{disasterDetails.type || 'N/A'}</span>
+            <strong className="text-gray-400">Disaster Name:</strong>
+            <span className="block text-white">{disasterDetails.name || 'N/A'}</span>
           </div>
 
           {/* Location */}
@@ -55,7 +55,7 @@ function ViewDisasterModal({ isOpen, disasterDetails, onClose }) {
           {/* Affected Areas */}
           <div className="border-b pb-4">
             <strong className="text-gray-400">Affected Areas:</strong>
-            <span className="block text-white">{disasterDetails.affectedAreas || 'N/A'}</span>
+            <span className="block text-white">{disasterDetails.affectedarea || 'N/A'}</span>
           </div>
 
           {/* Date */}

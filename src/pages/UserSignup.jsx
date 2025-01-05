@@ -73,7 +73,7 @@ function UserSignup() {
             if (response.status === 200) {
                 alert('Registration successful');
                 setTimeout(() => {
-                    navigate('/userlogin'); // Redirect after successful registration
+                    navigate('/verify'); // Redirect after successful registration
                 }, 3000);
             } else if (response.status === 406) { // Assuming status 409 indicates the user already exists
                 alert('User already exists');

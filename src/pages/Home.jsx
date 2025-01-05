@@ -15,9 +15,7 @@ function Home() {
 
             <div className='bg-cover  bg-homecover py-20  ' >
                 <div className=' text-white text-2xl'>
-                    <marquee behavior="" direction="">
-                        🚨 Disaster Alert: Evacuation order in effect! 🚨
-                    </marquee>
+                   
                 </div>
               
                     <div className='grid md:grid-cols-3  text-white md:ps-28     md:py-36 py-10 gap-10 md:gap-0'>

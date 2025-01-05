@@ -19,6 +19,7 @@ import DisasterManagement from './pages/DisasterManagement';
 import AdminAuth from './pages/AdminAuth';
 import UserDashboard from './pages/UserDashboard';
 import Pagenotfound from './pages/Pagenotfound';
+import Verificationmessage from './pages/Verificationmessage';
 
 
 
@@ -42,6 +43,7 @@ function App() {
       <Route path='/usermngm' element={<Usermanagement/>}/>
       <Route path='/helprequest' element={<HelpRequest/>}/>
       <Route path='/disastermngm' element={<DisasterManagement/>}/>
+      <Route path='/verify' element={<Verificationmessage/>}/>
       <Route path='*' element={<Pagenotfound />} />
     </Routes>
    
