@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Header() {
     const [show, setShow] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation(); // Get current route
 
     const toggleMenu = () => {
         setShow(!show);
@@ -23,8 +24,6 @@ function Header() {
                         USER
                     </button>
                 </Link>
-                {/* Add a manual close button */}
-               
             </div>
         );
     };
@@ -34,8 +33,9 @@ function Header() {
         navigate('/');
     };
 
-    // Check if token is available in sessionStorage
     const isLoggedIn = sessionStorage.getItem('token');
+
+    const isActive = (path) => location.pathname === path; // Check if the route matches
 
     return (
         <>
@@ -45,10 +45,15 @@ function Header() {
                         <img src="/Mitram.png" alt="" className="w-20 h-20" />
                     </div>
                     <div className="justify-center items-center text-sky font-bold text-xl hidden md:flex">
-                        {/* Check if user is logged in to redirect to dashboard */}
-                        <Link to={isLoggedIn ? '/userdashboard' : '/'}><h1 className="md:me-20 me-5">Home</h1></Link>
-                        <Link to={'/disasters'}><h1 className="md:me-20 me-5">Disasters</h1></Link>
-                        <Link to={'/shelters'}><h1 className="md:me-20 me-5">Shelters</h1></Link>
+                        <Link to={isLoggedIn ? '/userdashboard' : '/'} className={`md:me-20 me-5 ${isActive(isLoggedIn ? '/userdashboard' : '/') ? 'text-blue-800' : ''}`}>
+                            Home
+                        </Link>
+                        <Link to={'/disasters'} className={`md:me-20 me-5 ${isActive('/disasters') ? 'text-blue-800' : ''}`}>
+                            Disasters
+                        </Link>
+                        <Link to={'/shelters'} className={`md:me-20 me-5 ${isActive('/shelters') ? 'text-blue-800' : ''}`}>
+                            Shelters
+                        </Link>
 
                         {!isLoggedIn ? (
                             <button
@@ -79,15 +84,58 @@ function Header() {
             </div>
 
             {/* Mobile View */}
-            <div
-                className={`fixed top-20 right-0 lg:hidden bg-black font-semibold w-40 h-full shadow-lg transition-transform duration-500 z-10 ease-in-out transform ${show ? 'translate-x-0' : 'translate-x-full'}`}
+           {/* Mobile View */}
+<div
+    className={`fixed top-20 right-0 lg:hidden bg-black font-semibold w-40 h-full shadow-lg transition-transform duration-500 z-10 ease-in-out transform ${show ? 'translate-x-0' : 'translate-x-full'}`}
+>
+    <div className="p-5">
+        <Link
+            to={isLoggedIn ? '/userdashboard' : '/'}
+            onClick={toggleMenu}
+            className={`text-lg block mb-4 ${isActive(isLoggedIn ? '/userdashboard' : '/') ? 'text-blue-800' : 'text-white'}`}
+        >
+            Home
+        </Link>
+        <Link
+            to={'/disasters'}
+            onClick={toggleMenu}
+            className={`text-lg block mb-4 ${isActive('/disasters') ? 'text-blue-800' : 'text-white'}`}
+        >
+            Disasters
+        </Link>
+        <Link
+            to={'/shelters'}
+            onClick={toggleMenu}
+            className={`text-lg block mb-4 ${isActive('/shelters') ? 'text-blue-800' : 'text-white'}`}
+        >
+            Shelters
+        </Link>
+
+        {/* Mobile Login/Logout Button */}
+        {!isLoggedIn ? (
+            <button
+                className="bg-sky-500 text-white rounded-full font-semibold w-full px-8 py-2 mt-4 transition-all duration-300 hover:bg-sky border border-sky hover:shadow-lg"
+                onClick={() => {
+                    handleLogin();
+                    toggleMenu(); // Close the menu
+                }}
             >
-                <div className="p-5">
-                    <Link to={isLoggedIn ? '/userdashboard' : '/'} onClick={toggleMenu} className="text-lg text-white "><p className="mt-1">Home </p></Link>
-                    <Link to={'/disasters'} onClick={toggleMenu} className="text-lg text-white "><p className="mt-1">Disasters</p></Link>
-                    <Link to={'/shelters'} onClick={toggleMenu} className="text-lg text-white"><p className="mt-1">Shelters</p></Link>
-                </div>
-            </div>
+                Login
+            </button>
+        ) : (
+            <button
+                className="bg-sky-600 text-white rounded-full font-semibold w-full px-8 py-2 mt-4 transition-all duration-300 hover:bg-red-500 border border-sky hover:shadow-lg"
+                onClick={() => {
+                    handleLogout();
+                    toggleMenu(); // Close the menu
+                }}
+            >
+                Logout
+            </button>
+        )}
+    </div>
+</div>
+
 
             <ToastContainer
                 position="top-right"

@@ -6,6 +6,9 @@ import { serverUrl } from '../services/serverUrl';
 
 function Disasters() {
     const [alldisaster, setalldisaster] = useState([]);
+    const [searchTerm, setSearchTerm] = useState(''); // State to manage the search term
+    const [filteredDisasters, setFilteredDisasters] = useState([]); // State for filtered results
+
     const getDisaster = async () => {
         try {
             const result = await getalldisasterApi();
@@ -19,21 +22,45 @@ function Disasters() {
         getDisaster();
     }, []);
 
+    useEffect(() => {
+        const filtered = alldisaster.filter((disaster) =>
+            disaster.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            disaster.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            disaster.affectedarea.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredDisasters(filtered);
+    }, [searchTerm, alldisaster]); // Filter disasters whenever the search term or the full list changes
+
     return (
         <>
             <Header />
             <div className="py-20 bg-disastercover bg-cover">
                 <div className="container px-8">
-                    {alldisaster.length === 0 ? (
+                <div className="flex justify-end mb-8">
+    <input
+        type="text"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        placeholder="Search disasters by name, location, or affected area"
+        className="p-3 w-full md:w-1/3 rounded-full shadow-md bg-black text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-600 transition duration-200 ease-in-out"
+        style={{
+            border: '1px solid #333',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+        }}
+    />
+</div>
+
+
+                    {filteredDisasters.length === 0 ? (
                         <div className="text-center text-white mt-20">
                             <h1 className="text-4xl font-bold mb-4">No Disasters Found</h1>
                             <p className="text-lg text-gray-300">
-                                Currently, there are no disaster relief operations listed. Please check back later.
+                                Currently, there are no matching disaster relief operations listed. Please try a different search.
                             </p>
                         </div>
                     ) : (
                         <div className="grid md:grid-cols-3 gap-10 mt-16">
-                            {alldisaster.map((item) => (
+                            {filteredDisasters.map((item) => (
                                 <div
                                     key={item.name}
                                     className="bg-black bg-opacity-75 rounded-lg text-white shadow-lg overflow-hidden"

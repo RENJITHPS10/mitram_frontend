@@ -38,7 +38,7 @@ function UserDashboard() {
             setError(null);
             const reqHeader = { Authorization: `Bearer ${token}` };
             const response = await getusersdisaster(reqHeader);
-            setDisasters(response.data.disasters);
+            setDisasters(response.data.disasters|| [] );
         } catch (err) {
             setError('Failed to load disasters. Please try again later.');
         } finally {
@@ -53,7 +53,7 @@ function UserDashboard() {
             setError(null);
             const reqHeader = { Authorization: `Bearer ${token}` };
             const response = await getUsersHelpRequests(reqHeader);
-            setHelpRequests(response.data.helpRequests);
+            setHelpRequests(response.data.helpRequests || []);
         } catch (err) {
             setError('Failed to load help requests. Please try again later.');
         } finally {
@@ -121,6 +121,7 @@ function UserDashboard() {
         setSelectedHelpRequest(request);
         setIsHelpModalOpen(true);
     };
+    console.log(disasters)
 
     return (
         <>
