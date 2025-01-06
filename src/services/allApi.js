@@ -60,7 +60,7 @@ export const approveuserApi = async (userId, reqHeader) => {
 
 
 export const rejectUserApi = async (userId, reqHeader) => {
-    return await commonApi('PATCH', `${serverUrl}/admin/reject-user/${userId}`, '', reqHeader);
+    return await commonApi('DELETE', `${serverUrl}/admin/reject-user/${userId}`, '', reqHeader);
 };
 
 export const getallpendinguserAPi = async (reqHeader) => {

@@ -125,121 +125,147 @@ function UserDashboard() {
 
     return (
         <>
-            <Header />
-            <div className="bg-gradient-to-br from-gray-900 to-black min-h-screen py-20 px-5">
-                <div className="text-center text-white mb-10">
-                    <h1 className="text-5xl font-extrabold">User Dashboard</h1>
-                    <p className="text-lg text-gray-400 mt-3">
-                        Manage your reported disasters and help requests in one place.
-                    </p>
-                </div>
-
-                <div className="flex justify-center space-x-6 mb-16">
-                    <button
-                        onClick={() => setIsModalOpen(true)}
-                        className="bg-blue-500 hover:bg-blue-600 text-white text-lg font-medium py-3 px-8 rounded-xl shadow-lg"
-                    >
-                        Report Disaster
-                    </button>
-                    <button
-                        onClick={() => setIsHelpModalOpen(true)} // Open modal to request help
-                        className="bg-green-500 hover:bg-green-600 text-white text-lg font-medium py-3 px-8 rounded-xl shadow-lg"
-                    >
-                        Request Help
-                    </button>
-
-                </div>
-
-                <div className="text-white mb-16">
-                    <h2 className="text-4xl font-bold mb-8 border-b border-gray-700 pb-3">Reported Disasters</h2>
-                    {isLoading ? (
-                        <p className="text-gray-400">Loading disasters...</p>
-                    ) : error ? (
-                        <p className="text-red-500">{error}</p>
-                    ) : disasters.length === 0 ? (
-                        <p className="text-gray-400">No disasters reported yet.</p>
-                    ) : (
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-                            {disasters.map((disaster) => (
-                                <div key={disaster._id} className="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-                                    <img
-                                        className="h-48 w-full object-cover"
-                                        src={`${serverUrl}/${disaster.image}`}
-                                        alt={disaster.name}
-                                    />
-                                    <div className="p-6">
-                                        <h3 className="text-2xl font-bold mb-2">{disaster.name}</h3>
-                                        <p className="text-gray-300 mb-3">{disaster.description}</p>
-                                        <p className="text-sm text-gray-400">
-                                            Reported on: {new Date(disaster.date).toLocaleDateString()}
-                                        </p>
-                                        <div className="flex space-x-3 mt-4">
-                                            <button
-                                                onClick={() => handleEditDisaster(disaster)}
-                                                className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md"
-                                            >
-                                                Edit Report
-                                            </button>
-                                            <button
-                                                onClick={() => handleDeleteDisaster(disaster._id)}
-                                                className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg shadow-md"
-                                            >
-                                                Delete Report
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                </div>
-
-                <div className="text-white mb-16">
-                    <h2 className="text-4xl font-bold mb-8 border-b border-gray-700 pb-3">Help Requests</h2>
-                    {isLoading ? (
-                        <p className="text-gray-400">Loading help requests...</p>
-                    ) : error ? (
-                        <p className="text-red-500">{error}</p>
-                    ) : helpRequests.length === 0 ? (
-                        <p className="text-gray-400">No help requests submitted yet.</p>
-                    ) : (
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-                        {helpRequests.map((request) => (
-                            <div key={request._id} className="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+        <Header />
+        <div className="bg-gradient-to-br from-gray-900 to-black min-h-screen py-20 px-5">
+            <div className="text-center text-white mb-12">
+                <h1 className="text-5xl font-extrabold tracking-tight">User Dashboard</h1>
+                <p className="text-lg text-gray-400 mt-3">
+                    Manage your reported disasters and help requests efficiently.
+                </p>
+            </div>
+    
+            {/* Action Buttons */}
+            <div className="flex justify-center gap-8 mb-16">
+                <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold py-3 px-8 rounded-xl shadow-lg transition-transform transform hover:scale-105"
+                >
+                    Report Disaster
+                </button>
+                <button
+                    onClick={() => setIsHelpModalOpen(true)}
+                    className="bg-green-600 hover:bg-green-700 text-white text-lg font-semibold py-3 px-8 rounded-xl shadow-lg transition-transform transform hover:scale-105"
+                >
+                    Request Help
+                </button>
+            </div>
+    
+            {/* Reported Disasters Section */}
+            <section className="text-white mb-20">
+                <h2 className="text-4xl font-bold mb-8 border-b border-gray-700 pb-4">
+                    Reported Disasters
+                </h2>
+                {isLoading ? (
+                    <p className="text-gray-400 animate-pulse">Loading disasters...</p>
+                ) : error ? (
+                    <p className="text-red-500">{error}</p>
+                ) : disasters.length === 0 ? (
+                    <p className="text-gray-400">No disasters reported yet.</p>
+                ) : (
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+                        {disasters.map((disaster) => (
+                            <div
+                                key={disaster._id}
+                                className="bg-gray-800 rounded-lg shadow-xl transition-transform transform hover:scale-105 overflow-hidden"
+                            >
+                                <img
+                                    className="h-48 w-full object-cover"
+                                    src={`${serverUrl}/${disaster.image}`}
+                                    alt={disaster.name}
+                                />
                                 <div className="p-6">
-                                    <h3 className="text-2xl font-bold mb-2">{request.title}</h3>
-                                    <p className="text-gray-300 mb-3">{request.description}</p>
+                                    <h3 className="text-2xl font-semibold mb-2">{disaster.name}</h3>
+                                    <p className="text-gray-300 mb-4">{disaster.description}</p>
                                     <p className="text-sm text-gray-400">
-                                        Requested on: {new Date(request.dateCreated).toLocaleDateString()}
+                                        Reported on: {new Date(disaster.date).toLocaleDateString()}
                                     </p>
-                                    <p className="text-sm text-gray-500 mt-2">Status: <span className={`font-semibold ${request.status === 'Completed' ? 'text-green-500' : request.status === 'Pending' ? 'text-yellow-500' : 'text-red-500'}`}>{request.status}</span></p>
-                                    <div className="flex space-x-3 mt-4">
+                                    <div className="flex justify-between mt-4">
                                         <button
-                                            onClick={() => handleEditHelpRequest(request)}
-                                            className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md"
+                                            onClick={() => handleEditDisaster(disaster)}
+                                            className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md transition"
                                         >
-                                            Edit Request
+                                            Edit
                                         </button>
                                         <button
-                                            onClick={() => handleDeleteHelpRequest(request._id)}
-                                            className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg shadow-md"
+                                            onClick={() => handleDeleteDisaster(disaster._id)}
+                                            className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg shadow-md transition"
                                         >
-                                            Delete Request
+                                            Delete
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         ))}
                     </div>
-                    
-                    )}
-                </div>
-
-                {isModalOpen && <DisasterModal />}
-                {isHelpModalOpen && <HelpRequestModal />}
-            </div>
-            <Footer />
-        </>
+                )}
+            </section>
+    
+            {/* Help Requests Section */}
+            <section className="text-white mb-20">
+                <h2 className="text-4xl font-bold mb-8 border-b border-gray-700 pb-4">
+                    Help Requests
+                </h2>
+                {isLoading ? (
+                    <p className="text-gray-400 animate-pulse">Loading help requests...</p>
+                ) : error ? (
+                    <p className="text-red-500">{error}</p>
+                ) : helpRequests.length === 0 ? (
+                    <p className="text-gray-400">No help requests submitted yet.</p>
+                ) : (
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+                        {helpRequests.map((request) => (
+                            <div
+                                key={request._id}
+                                className="bg-gray-800 rounded-lg shadow-xl transition-transform transform hover:scale-105 overflow-hidden"
+                            >
+                                <div className="p-6">
+                                    <h3 className="text-2xl font-semibold mb-2">{request.title}</h3>
+                                    <p className="text-gray-300 mb-4">{request.description}</p>
+                                    <p className="text-sm text-gray-400">
+                                        Requested on: {new Date(request.dateCreated).toLocaleDateString()}
+                                    </p>
+                                    <p className="text-sm text-gray-500 mt-2">
+                                        Status:{' '}
+                                        <span
+                                            className={`font-semibold ${
+                                                request.status === 'Completed'
+                                                    ? 'text-green-500'
+                                                    : request.status === 'Pending'
+                                                    ? 'text-yellow-500'
+                                                    : 'text-red-500'
+                                            }`}
+                                        >
+                                            {request.status}
+                                        </span>
+                                    </p>
+                                    <div className="flex justify-between mt-4">
+                                        <button
+                                            onClick={() => handleEditHelpRequest(request)}
+                                            className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md transition"
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
+                                            onClick={() => handleDeleteHelpRequest(request._id)}
+                                            className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg shadow-md transition"
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </section>
+    
+            {/* Modals */}
+            {isModalOpen && <DisasterModal />}
+            {isHelpModalOpen && <HelpRequestModal />}
+        </div>
+        <Footer />
+    </>
+    
     );
 }
 

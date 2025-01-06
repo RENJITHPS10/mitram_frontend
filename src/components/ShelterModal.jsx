@@ -202,7 +202,18 @@ function ShelterModal({ shelter = null, onSuccess }) {
               <div className="flex justify-end space-x-4">
                 <button
                   type="button"
-                  onClick={() => setIsModalOpen(false)}
+                  onClick={() => setFormData({
+                    name: '',
+                    location: '',
+                    capacity: '',
+                    current_occupancy: '',
+                    amenities: '',
+                    contact: '',
+                    map: '',
+                    image: null, // File upload
+                  }
+                    
+                  )}
                   className="px-5 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-500"
                 >
                   Cancel

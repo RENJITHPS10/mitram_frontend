@@ -36,7 +36,7 @@ function ViewDisasterModal({ isOpen, disasterDetails, onClose }) {
             <div className="text-white">
               <span>Name: {disasterDetails.reportedBy?.userId?.username ||disasterDetails.reportedBy?.adminId?.name }</span>
               <br />
-              <span>Email: {disasterDetails.reportedBy?.userId?.email || 'N/A'}</span>
+              <span>Email: {disasterDetails.reportedBy?.userId?.email || disasterDetails.reportedBy?.adminId?.email}</span>
             </div>
           </div>
 

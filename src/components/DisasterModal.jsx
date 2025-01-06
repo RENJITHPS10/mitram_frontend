@@ -243,10 +243,21 @@ function DisasterModal() {
 
                             <div className="flex justify-end space-x-4">
                                 <button
-                                    onClick={() => setIsModalOpen(false)}
+                                    onClick={() =>{
+                                        setFormData({
+                                            name: '',
+                                            date: '',
+                                            description: '',
+                                            location: '',
+                                            affectedarea: '',
+                                            impact: '',
+                                            contacts: '',
+                                            image: null,
+                                        })
+                                    }}
                                     className="px-5 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-600 transition duration-300"
                                 >
-                                    Close
+                                    Cancel
                                 </button>
                                 <button
                                     type="submit"

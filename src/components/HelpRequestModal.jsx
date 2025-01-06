@@ -155,10 +155,17 @@ function HelpRequestModal() {
 
                             <div className="flex justify-end space-x-4">
                                 <button
-                                    onClick={() => setIsHelpModalOpen(false)}
+                                    onClick={() => { setFormData({
+                                        requestType:'' ,
+                                        description:'' ,
+                                        location: '',
+                                        contact: '',
+                                    });
+                                        
+                                    }}
                                     className="px-5 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-600 transition duration-300"
                                 >
-                                    Close
+                                    Cancel
                                 </button>
                                 <button
                                     type="submit"
