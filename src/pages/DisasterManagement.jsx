@@ -60,7 +60,7 @@ function DisasterManagement() {
 
   useEffect(() => {
     getDisaster();
-  }, []);
+  }, [alldisaster]);
 
   return (
     <>

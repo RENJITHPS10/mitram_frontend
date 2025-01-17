@@ -1,1 +1,1 @@
-export const serverUrl='https://mitram-backend-b0ms.onrender.com'
+export const serverUrl='https://mitram-backend-1.onrender.com'
