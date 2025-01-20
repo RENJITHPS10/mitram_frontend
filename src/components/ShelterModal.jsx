@@ -3,6 +3,7 @@ import { modalResponseContext } from '../context/Contextshare';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { updateshelterApi, createshelterApi } from '../services/allApi';
+import { serverUrl } from '../services/serverUrl';
 
 function ShelterModal({ shelter = null, onSuccess }) {
   const { setIsModalOpen, isModalOpen } = useContext(modalResponseContext);
@@ -18,6 +19,7 @@ function ShelterModal({ shelter = null, onSuccess }) {
     contact: '',
     map: '',
     image: null, // File upload
+    imageUrl: '', // URL of the existing image
   });
 
   // Pre-fill the form if a shelter is being edited
@@ -32,6 +34,7 @@ function ShelterModal({ shelter = null, onSuccess }) {
         contact: shelter.contact || '',
         map: shelter.map || '',
         image: null, // Reset file input for simplicity
+        imageUrl: shelter.image || '', // Set existing image URL
       });
     }
   }, [shelter]);
@@ -50,22 +53,22 @@ function ShelterModal({ shelter = null, onSuccess }) {
   // Handle form submission (add or update shelter)
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const data = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
-      if (key !== 'image' || value) {
+      if (key !== 'imageUrl' && (key !== 'image' || value)) {
         data.append(key, value);
       }
     });
-  
+
     const headers = {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'multipart/form-data',
     };
-  
+
     try {
       let response;
-  
+
       if (shelter) {
         // Update the shelter
         response = await updateshelterApi(shelter._id, data, headers);
@@ -73,16 +76,15 @@ function ShelterModal({ shelter = null, onSuccess }) {
         // Create a new shelter
         response = await createshelterApi(data, headers);
       }
-  
-      if (response.status === 200 || response.status === 201) { // Check for success status codes
+
+      if (response.status === 200 || response.status === 201) {
         console.log('Shelter updated/created successfully');
         setIsModalOpen(false); // Close the modal
         if (onSuccess) onSuccess(); // Refresh shelter list
       } else {
         console.error('Server returned an error:', response.status, response.statusText);
-        // Handle specific errors based on response status 
       }
-  
+
     } catch (error) {
       console.error('Error submitting shelter:', error);
     }
@@ -195,6 +197,13 @@ function ShelterModal({ shelter = null, onSuccess }) {
                     onChange={handleFileChange}
                     className="w-full px-4 py-2 bg-gray-800 text-white"
                   />
+                  {formData.imageUrl && (
+                    <img
+                      src={`${serverUrl}/${formData.imageUrl}`}
+                      alt="Shelter"
+                      className="mt-4 rounded-lg w-full max-h-64 object-cover"
+                    />
+                  )}
                 </div>
               </div>
 
@@ -202,18 +211,19 @@ function ShelterModal({ shelter = null, onSuccess }) {
               <div className="flex justify-end space-x-4">
                 <button
                   type="button"
-                  onClick={() => setFormData({
-                    name: '',
-                    location: '',
-                    capacity: '',
-                    current_occupancy: '',
-                    amenities: '',
-                    contact: '',
-                    map: '',
-                    image: null, // File upload
+                  onClick={() =>
+                    setFormData({
+                      name: '',
+                      location: '',
+                      capacity: '',
+                      current_occupancy: '',
+                      amenities: '',
+                      contact: '',
+                      map: '',
+                      image: null,
+                      imageUrl: '',
+                    })
                   }
-                    
-                  )}
                   className="px-5 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-500"
                 >
                   Cancel
