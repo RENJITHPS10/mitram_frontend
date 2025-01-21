@@ -144,6 +144,7 @@ function DisasterManagement() {
       <ViewDisasterModal
         isOpen={isViewModalOpen}
         disasterDetails={selectedDisaster}
+        setSelectedDisaster={setSelectedDisaster}
         onClose={() => setIsViewModalOpen(false)}
       />
     </>

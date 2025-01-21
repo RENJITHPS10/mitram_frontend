@@ -7,7 +7,15 @@ import { reportdisasterApi, updateusersdisasterApi } from '../services/allApi';
 import { serverUrl } from '../services/serverUrl';
 
 function DisasterModal() {
-    const { setIsModalOpen, isModalOpen, selectedDisaster, setDisasters, disasters } = useContext(modalResponseContext);
+    const {
+        setIsModalOpen,
+        isModalOpen,
+        selectedDisaster,
+        setSelectedDisaster,
+        setDisasters,
+        disasters,
+    } = useContext(modalResponseContext);
+
     const [formData, setFormData] = useState({
         name: '',
         date: '',
@@ -31,6 +39,17 @@ function DisasterModal() {
                 affectedarea: selectedDisaster.affectedarea || '',
                 impact: selectedDisaster.impact || '',
                 contacts: selectedDisaster.contacts || '',
+                image: null,
+            });
+        } else {
+            setFormData({
+                name: '',
+                date: '',
+                description: '',
+                location: '',
+                affectedarea: '',
+                impact: '',
+                contacts: '',
                 image: null,
             });
         }
@@ -96,6 +115,7 @@ function DisasterModal() {
                 alert(selectedDisaster ? 'Disaster updated successfully.' : 'Disaster reported successfully.');
 
                 setIsModalOpen(false);
+                setSelectedDisaster(null); // Reset the selected disaster
                 setFormData({
                     name: '',
                     date: '',
@@ -123,6 +143,21 @@ function DisasterModal() {
         }
     };
 
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setSelectedDisaster(null); // Ensure we reset the selected disaster
+        setFormData({
+            name: '',
+            date: '',
+            description: '',
+            location: '',
+            affectedarea: '',
+            impact: '',
+            contacts: '',
+            image: null,
+        });
+    };
+
     return (
         <>
             {isModalOpen && (
@@ -133,7 +168,7 @@ function DisasterModal() {
                                 {selectedDisaster ? 'Edit Disaster' : 'Report a Disaster'}
                             </h2>
                             <button
-                                onClick={() => setIsModalOpen(false)}
+                                onClick={closeModal}
                                 className="text-gray-400 hover:text-red-600 transition duration-300"
                             >
                                 <FontAwesomeIcon icon={faXmark} className="text-3xl" />
@@ -286,11 +321,12 @@ function DisasterModal() {
                             <div className="flex justify-end space-x-4">
                                 <button
                                     type="button"
-                                    onClick={() => setIsModalOpen(false)}
+                                    onClick={closeModal}
                                     className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-500"
                                 >
                                     Cancel
                                 </button>
+
                                 <button
                                     type="submit"
                                     className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500"

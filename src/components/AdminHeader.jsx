@@ -44,24 +44,19 @@ function AdminHeader() {
                 }`}
             >
                 <div className='py-4'>
-                    <Link to={'/admin'}>
+                    <Link to={'/usermngm'}>
                         <h1 className='text-lg text-white px-5 py-4'>
                             <FontAwesomeIcon icon={faUsers} className='me-2 text-blue-500' />
                             User Management
                         </h1>
                     </Link>
-                    <Link to={''}>
+                    <Link to={'disastermngm'}>
                         <h1 className='text-xl text-white px-5 py-4'>
                             <FontAwesomeIcon icon={faTriangleExclamation} className='me-2 text-yellow-400' />
                             Report Disaster
                         </h1>
                     </Link>
-                    <Link to={'/volunteermngm'}>
-                        <h1 className='text-xl text-white px-5 py-4'>
-                            <FontAwesomeIcon icon={faUsers} className='me-2' />
-                            Volunteer Management
-                        </h1>
-                    </Link>
+                  
                     <Link to={'/sheltermngm'}>
                         <h1 className='text-xl text-white px-5 py-4'>
                             <FontAwesomeIcon icon={faPersonShelter} className='me-2' />

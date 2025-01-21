@@ -28,10 +28,12 @@ function UserSignup() {
 
     const handleFileChange = (e) => {
         const { files } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            proof: files[0],
-        }));
+        if (files && files[0]) {
+            setFormData((prevData) => ({
+                ...prevData,
+                proof: files[0],
+            }));
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -88,6 +90,7 @@ function UserSignup() {
     return (
         <div className="bg-logincover bg-no-repeat bg-cover bg-center">
             <ToastContainer /> {/* Toast container */}
+
             <Link to={'/'}>
                 <button className="absolute md:top-1 md:left-64 md:bg-gradient-to-r from-[#3182CE] to-[#066bb4] px-6 py-2 text-white text-xl hover:from-[#2563EB] hover:to-[#1E40AF] transition duration-300 rounded-full">
                     <FontAwesomeIcon icon={faBackward} className="me-2" />
@@ -125,7 +128,7 @@ function UserSignup() {
                 </div>
                 <div className="bg-[#1A202C] md:rounded-r-3xl pb-10">
                     <h1 className="text-4xl font-bold text-center py-10 text-white">Sign Up</h1>
-                    <div className="flex flex-col items-center space-y-6">
+                    <form onSubmit={handleSubmit} className="flex flex-col items-center space-y-6">
                         <input
                             type="text"
                             name="username"
@@ -179,26 +182,14 @@ function UserSignup() {
                             placeholder="Confirm Password"
                         />
                         <button
-                            onClick={handleSubmit}
+                            type="submit"
                             className="bg-gradient-to-r from-[#3182CE] to-[#1E40AF] w-3/4 rounded-full py-2 mt-6 text-xl hover:bg-gradient-to-r hover:from-[#2563EB] hover:to-[#1D4ED8]"
                         >
                             Register
                         </button>
-                    </div>
+                    </form>
                 </div>
             </div>
-            <ToastContainer
-            position="top-center"
-            autoClose={3000}
-            newestOnTop
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss={false}
-            draggable={false}
-            theme="dark"
-            transition="slide"
-        />
-
         </div>
     );
 }
