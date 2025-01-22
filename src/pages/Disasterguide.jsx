@@ -45,7 +45,7 @@ function Disasterguide() {
             </div>
             {/* Guideline Card 4 */}
             <div className="bg-gray-800 p-6 rounded-lg shadow-lg transition duration-300 hover:scale-105 hover:shadow-xl">
-              <img src="/flood.jpg" alt="Hurricane Safety" className="w-full h-48 object-cover rounded-lg" />
+            <iframe  src="https://www.youtube.com/embed/9bQ8VSf068M" title="Hurricane Safety - During the Storm" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen className='w-full h-60'></iframe>
               <h3 className="text-2xl font-semibold text-teal-400 mt-4">Hurricane Evacuation</h3>
               <p className="mt-2 text-gray-300">
                 Stay updated with weather forecasts, and evacuate immediately if instructed. Protect windows and doors, and seek shelter in a sturdy building.
@@ -56,7 +56,7 @@ function Disasterguide() {
             </div>
             {/* Guideline Card 5 */}
             <div className="bg-gray-800 p-6 rounded-lg shadow-lg transition duration-300 hover:scale-105 hover:shadow-xl">
-              <img src="/flood.jpg" alt="Tornado Safety" className="w-full h-48 object-cover rounded-lg" />
+            <iframe width="937" height="527" src="https://www.youtube.com/embed/wcTdLnrxznM" title="How to Survive a Tornado And Recognize It" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen className='w-full h-60' ></iframe>
               <h3 className="text-2xl font-semibold text-teal-400 mt-4">Tornado Safety</h3>
               <p className="mt-2 text-gray-300">
                 If you are in a tornado warning, seek shelter in a basement or an interior room away from windows.
@@ -68,7 +68,7 @@ function Disasterguide() {
             </div>
             {/* Guideline Card 6 */}
             <div className="bg-gray-800 p-6 rounded-lg shadow-lg transition duration-300 hover:scale-105 hover:shadow-xl">
-              <img src="/flood.jpg" alt="Volcano Safety" className="w-full h-48 object-cover rounded-lg" />
+            <iframe width="937" height="527" src="https://www.youtube.com/embed/Z-w_z9yobpE" title="How to Prepare for a Volcanic Eruption | Disasters" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen className='w-full h-60' ></iframe>
               <h3 className="text-2xl font-semibold text-teal-400 mt-4">Volcano Eruption Response</h3>
               <p className="mt-2 text-gray-300">
                 Stay indoors, away from ash clouds. Wear a mask to avoid inhaling ash, and cover your skin to protect against burns.
